@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WLBF</title>
+    </head>
+
+    <body>
+        {% if blog %}
+        <h1>{{ blog.title }}</h1>
+        {{ blog.post_time }}<br/>
+        {{ blog.update_time }}<br/>
+        {{ blog.content }}<br/>
+        {% else %}
+            The specified blog {{ blog.title }} does not exist!
+        {% endif %}
+    </body>
+</html>

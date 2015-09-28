@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from wlbf.models import Category, Blog
-from wlbf.forms import CategoryForm
+from wlbf.forms import CategoryForm, BlogForm
 
 
 def index(request):
@@ -17,7 +17,7 @@ def about(request):
 
 def category(request, category_name_slug):
 
-    context_dict = {}
+    context_dict = {'category_name_slug': category_name_slug}
 
     try:
         category = Category.objects.get(slug=category_name_slug)
@@ -47,3 +47,40 @@ def add_category(request):
         form = CategoryForm()
 
     return render(request, 'wlbf/add_category.html', {'form': form})
+
+
+def blog(request, id):
+    
+    try:
+        blog = Blog.objects.get(id=str(id))
+
+    except Blog.DoesNotExist:
+        raise Http404        
+ 
+    return render(request, 'wlbf/blog.html', {'blog': blog})
+
+
+def add_blog(request, category_name_slug):
+    
+    try:
+        cat = Category.objects.get(slug=category_name_slug)
+    except Category.DoesNotExist:
+                cat = None
+
+    if request.method == 'POST':
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            if cat:
+                blog = form.save(commit=False)
+                blog.category = cat
+                blog.views = 0
+                blog.save()
+                return category(request, category_name_slug)
+        else:
+            print form.errors
+    else:
+        form = BlogForm()
+
+    context_dict = {'form':form, 'category': cat}
+
+    return render(request, 'wlbf/add_blog.html', context_dict)    

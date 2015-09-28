@@ -10,14 +10,14 @@
         {% if categories %}
             <ul>
                 {% for category in categories %}
-                <li>{{ category.name }}</li>
+                <!-- Following line changed to add an HTML hyperlink -->
+                <li><a href="/wlbf/category/{{ category.slug }}">{{ category.name }}</a></li>
                 {% endfor %}
             </ul>
-        {% else %}
+       {% else %}
             <strong>There are no categories present.</strong>
-        {% endif %}
-
-        <a href="/wlbf/about/">About</a>
+       {% endif %}
+    <a href="/wlbf/add_category/">Add a New Category</a><br />
+    <a href="/wlbf/about/">About</a><br />
     </body>
 </html>
-

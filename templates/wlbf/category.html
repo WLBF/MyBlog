@@ -7,15 +7,16 @@
     <body>
         <h1>{{ category_name }}</h1>
         {% if category %}
-            {% if pages %}
+            {% if blogs %}
             <ul>
-                {% for page in pages %}
-                <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                {% for blog in blogs %}
+                <li><a href="{% url 'blog' id=blog.id%}">{{ blog.title }}</a></li>
                 {% endfor %}
             </ul>
             {% else %}
-                <strong>No pages currently in category.</strong>
+                <strong>No blogs currently in category.</strong>
             {% endif %}
+            <a href="/wlbf/category/{{ category.name }}/add_blog/">Add a New Blog<a/>
         {% else %}
             The specified category {{ category_name }} does not exist!
         {% endif %}

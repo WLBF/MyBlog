@@ -28,12 +28,15 @@ class Blog(models.Model):
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Category, self).save(*args, **kwargs)
+        self.slug = slugify(self.title)
+        super(Blog, self).save(*args, **kwargs)
 
 
     def __unicode__(self):
         return self.title
+
+    class Meta:
+        ordering = ['-update_time']
 
 
 class UserProfile(models.Model):
