@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>WLBF</title>
-    </head>
+{% extends 'wlbf/base.html' %}
 
-    <body>
+{% load staticfiles %}
+
+{% block title %}WLBF{% endblock %}
+
+{% block body_block %}
+    <div class="page-header">
         <h1>Add a Blog</h1>
+    </div>
 
-        <form id="category_form" method="post" action="/wlbf/add_blog/">
+        <form id="category_form" method="post" action="/wlbf/category/{{ category.slug }}/add_blog/">
 
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
@@ -22,6 +24,5 @@
             <br/>
             <input type="submit" name="submit" value="Create Blog" />
         </form>
-    </body>
 
-</html>
+{% endblock %}

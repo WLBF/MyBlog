@@ -1,14 +1,16 @@
 {% extends "wlbf/base.html" %}
-
+{% load bootstrap_toolkit %}
 {% block body_block %}
-<h1>Login</h1>
-        <form method="post" action=".">
-                {% csrf_token %}
-                {{ form.as_p }}
 
-                <input type="submit" value="Log in" />
-                <input type="hidden" name="next" value="{{ next }}" />
-                </form>
+<link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
 
-        <p>Not  a member? <a href="{% url 'registration_register' %}">Register</a>!</p>
+
+<form class="form-signin" role="form" method="post" action=".">
+{% csrf_token %}
+
+<h2 class="form-signin-heading">Please sign in</h2>
+        {{ form|as_bootstrap }}
+        <button class="btn btn-primary" type="submit" value="Submit" />Sign in</button>
+        </form>
+
 {% endblock %}

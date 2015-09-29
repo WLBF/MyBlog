@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>WLBF</title>
-    </head>
+{% extends 'wlbf/base.html' %}
 
-    <body>
+{% load staticfiles %}
+
+{% block title %}WLBF{% endblock %}
+
+{% block body_block %}
+
+    <div class="page-header">
         <h1>WLBF says hello world!</h1>
+    </div>
 
         {% if categories %}
             <ul>
@@ -17,7 +20,5 @@
        {% else %}
             <strong>There are no categories present.</strong>
        {% endif %}
-    <a href="/wlbf/add_category/">Add a New Category</a><br />
-    <a href="/wlbf/about/">About</a><br />
-    </body>
-</html>
+
+{% endblock %}

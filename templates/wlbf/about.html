@@ -1,1 +1,18 @@
-fuck you!
+{% extends 'wlbf/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}About{% endblock %}
+
+{% block body_block %}
+    <div class="page-header">
+    <h1>This is LBF's Blog!</h1>
+    <br/>
+    </div>
+
+    <div>
+    <img src="{% static "images/WLBF.jpg" %}" alt="Picture of WLBF" /> 
+    </div>
+{% endblock %}
+
+
