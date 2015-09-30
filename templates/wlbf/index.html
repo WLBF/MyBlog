@@ -2,23 +2,62 @@
 
 {% load staticfiles %}
 
-{% block title %}WLBF{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body_block %}
 
-    <div class="page-header">
-        <h1>WLBF says hello world!</h1>
+
+<link href="{% static "css/blog.css" %}" rel="stylesheet"> 
+
+   {% if blog %}
+
+     <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">{{ blog.title }}</h2>
+            <p class="blog-post-meta">{{ blog.update_time }}</p>
+
+            <p>{{ blog.content }}</p>
+         </div>
+      </div>
+
+
+     <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="blog-sidebar-module blog-sidebar-module-inset">
+            <h4>About</h4>
+            <p> <em>This is LBF's blog.</em></p>
+          </div>
+          <div class="blog-sidebar-module">
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">March 2014</a></li>
+              <li><a href="#">February 2014</a></li>
+              <li><a href="#">January 2014</a></li>
+              <li><a href="#">December 2013</a></li>
+              <li><a href="#">November 2013</a></li>
+              <li><a href="#">October 2013</a></li>
+              <li><a href="#">September 2013</a></li>
+              <li><a href="#">August 2013</a></li>
+              <li><a href="#">July 2013</a></li>
+              <li><a href="#">June 2013</a></li>
+              <li><a href="#">May 2013</a></li>
+              <li><a href="#">April 2013</a></li>
+            </ol>
+          </div>
+          <div class="blog-sidebar-module">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="http://github.com/WLBF/">GitHub</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
     </div>
 
-        {% if categories %}
-            <ul>
-                {% for category in categories %}
-                <!-- Following line changed to add an HTML hyperlink -->
-                <li><a href="/wlbf/category/{{ category.slug }}">{{ category.name }}</a></li>
-                {% endfor %}
-            </ul>
-       {% else %}
-            <strong>There are no categories present.</strong>
-       {% endif %}
+   {% else %}
+            The specified blog {{ blog.title }} does not exist!
+   {% endif %}
+
 
 {% endblock %}

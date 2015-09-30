@@ -6,11 +6,9 @@ from django.shortcuts import redirect
 
 
 def index(request):
+    blog = Blog.objects.get()
 
-    category_list = Category.objects.order_by('-likes')[:5]
-    context_dict = {'categories': category_list}
-
-    return render(request, 'wlbf/index.html', context_dict)
+    return render(request, 'wlbf/index.html', {'blog': blog})
 
 
 def about(request):
@@ -52,13 +50,10 @@ def add_category(request):
 
 
 def get_blog(request, blog_id):
-    print '1'
     try:
         blog = Blog.objects.get(id=blog_id)
-        print '2'
     except Blog.DoesNotExist:
         raise Http404        
-    print '3'
     return render(request, 'wlbf/blog.html', {'blog': blog})
 
 
@@ -98,7 +93,6 @@ def track_url(request):
                 blog = Blog.objects.get(id=blog_id)
                 blog.views = blog.views + 1
                 blog.save()
-                print blog.title
                 return get_blog(request, blog_id)
             except:
                 pass
@@ -123,12 +117,10 @@ def get_category_list(max_results=0, starts_with=''):
 
 
 def suggest_category(request):
-        print 'shit'
         cat_list = []
         starts_with = ''
         if request.method == 'GET':
                 starts_with = request.GET['suggestion']
 
         cat_list = get_category_list(8, starts_with)
-        print cat_list
         return render(request, 'wlbf/category_list.html', {'cat_list': cat_list })

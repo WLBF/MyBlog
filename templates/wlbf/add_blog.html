@@ -1,8 +1,8 @@
 {% extends 'wlbf/base.html' %}
-
+{% load bootstrap_toolkit %} 
 {% load staticfiles %}
 
-{% block title %}WLBF{% endblock %}
+{% block title %}Add Blog{% endblock %}
 
 {% block body_block %}
     <div class="page-header">
@@ -12,15 +12,7 @@
         <form id="category_form" method="post" action="/wlbf/category/{{ category.slug }}/add_blog/">
 
             {% csrf_token %}
-            {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-
-            {% for field in form.visible_fields %}
-                {{ field.errors }}
-                {{ field.help_text }}<br/>
-                {{ field }}<br/>
-            {% endfor %}
+            {{ form|as_bootstrap }}
             <br/>
             <input type="submit" name="submit" value="Create Blog" />
         </form>

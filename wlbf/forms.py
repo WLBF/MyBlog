@@ -18,11 +18,10 @@ class CategoryForm(forms.ModelForm):
 
 
 class BlogForm(forms.ModelForm):
-    title = forms.CharField(max_length=128, help_text="Please enter the title of the blog.")
-    content = forms.CharField(widget=forms.Textarea, help_text="Please enter the content of the blog.")
+    title = forms.CharField(max_length=128)
+    content = forms.CharField(widget=forms.Textarea)
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-    slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     post_time = forms.DateTimeField(widget=forms.HiddenInput(), required=False)
     update_time = forms.DateTimeField(widget=forms.HiddenInput(), required=False)
 

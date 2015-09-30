@@ -25,12 +25,6 @@ class Blog(models.Model):
     likes = models.IntegerField(default=0)
     post_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
-    slug = models.SlugField(unique=True)
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super(Blog, self).save(*args, **kwargs)
-
 
     def __unicode__(self):
         return self.title

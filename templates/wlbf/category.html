@@ -2,30 +2,42 @@
 
 {% load staticfiles %}
 
-{% block title %}WLBF{% endblock %}
+{% block title %}Category{% endblock %}
 
 {% block body_block %}
+
+
+<link href="{% static "css/blog.css" %}" rel="stylesheet"> 
     <div class="page-header">
-        <h1>{{ category_name }}</h1>
     </div>
         {% if category %}
-            <h3>UPDATE:</h3>
             {% if blogs %}
-            <ul>
-                {% for blog in blogs %}
-                <li>
-                <a href="{% url 'goto' %}?blog_id={{blog.id}}">{{ blog.title }}</a>
-               {% if blog.views > 1 %}
-               ({{ blog.views }} views)
-               {% elif blog.views == 1 %}
-               ({{ blog.views }} view)
-               {% endif %} 
 
-               {{blog.update_time}}
 
-                </li>
-                {% endfor %}
-            </ul>
+            <h2 class="sub-header">{{ category.name }}</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Views</th>
+                  <th>Update</th>
+                </tr>
+              </thead>
+              <tbody>
+               {% for blog in blogs %}
+               <tr>
+                <td><a href="{% url 'goto' %}?blog_id={{blog.id}}">{{ blog.title }}</a></td>
+                <td>({{ blog.views }} views)</td>
+                <td class="blog-post-meta">{{ blog.update_time }}</td>
+               </tr>
+               {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+
+
             {% else %}
                 <strong>No blogs currently in category.</strong>
             {% endif %}
