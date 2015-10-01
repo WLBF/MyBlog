@@ -5,7 +5,6 @@
 ----------
 Requirements:
 
- - Python2.7
  - Django
  - django-bootstrap-toolkit
  - django-registration-redux
