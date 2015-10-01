@@ -2,22 +2,7 @@
  * Globals
  */
 
-body {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  color: #555;
-}
 
-h1, .h1,
-h2, .h2,
-h3, .h3,
-h4, .h4,
-h5, .h5,
-h6, .h6 {
-  margin-top: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  color: #333;
-}
 
 
 /*
@@ -79,13 +64,13 @@ h6, .h6 {
  */
 
 .blog-header {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 .blog-title {
-  margin-top: 30px;
+  margin-top: 0;
   margin-bottom: 0;
-  font-size: 60px;
+  font-size: 30px;
   font-weight: normal;
 }
 .blog-description {
@@ -143,7 +128,8 @@ h6, .h6 {
 }
 .blog-post-title {
   margin-bottom: 5px;
-  font-size: 40px;
+  font-size: 30px;
+  color: #999;
 }
 .blog-post-meta {
   margin-bottom: 20px;

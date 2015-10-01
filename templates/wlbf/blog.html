@@ -1,7 +1,7 @@
 {% extends 'wlbf/base.html' %}
 
 {% load staticfiles %}
-{% load custom_markdown %}
+{% load wlbf_extras %}
 {% block title %}Blog{% endblock %}
 
 {% block body_block %}
@@ -16,9 +16,8 @@
 
           <div class="blog-post">
             <h2 class="blog-post-title">{{ blog.title }}</h2>
-            <p class="blog-post-meta">{{ blog.update_time }}</p>
-
-            <p>{{ blog.content|custom_markdown }}</p>
+            <p class="blog-post-meta">{{ blog.post_time }}</p>
+            <div>{{ blog.content|custom_markdown }}</div>
          </div>
       </div>
 
@@ -26,30 +25,9 @@
      <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
           <div class="blog-sidebar-module blog-sidebar-module-inset">
             <h4>About</h4>
-            <p> <em>This is LBF's blog.</em></p>
-          </div>
-          <div class="blog-sidebar-module">
-            <h4>Archives</h4>
-            <ol class="list-unstyled">
-              <li><a href="#">March 2014</a></li>
-              <li><a href="#">February 2014</a></li>
-              <li><a href="#">January 2014</a></li>
-              <li><a href="#">December 2013</a></li>
-              <li><a href="#">November 2013</a></li>
-              <li><a href="#">October 2013</a></li>
-              <li><a href="#">September 2013</a></li>
-              <li><a href="#">August 2013</a></li>
-              <li><a href="#">July 2013</a></li>
-              <li><a href="#">June 2013</a></li>
-              <li><a href="#">May 2013</a></li>
-              <li><a href="#">April 2013</a></li>
-            </ol>
-          </div>
-          <div class="blog-sidebar-module">
-            <h4>Elsewhere</h4>
-            <ol class="list-unstyled">
-              <li><a href="http://github.com/WLBF/">GitHub</a></li>
-            </ol>
+            <p class="blog-post-meta">This is LBF's blog.</p>
+            <a href="lbf1353@live.com"> lbf1353@live.com</a><br/>
+            <a href="http://github.com/WLBF/">GitHub</a>
           </div>
         </div><!-- /.blog-sidebar -->
 

@@ -3,13 +3,12 @@ from wlbf.models import Category, Blog
 from wlbf.forms import CategoryForm, BlogForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def index(request):
-    blog = Blog.objects.get()
-
-    return render(request, 'wlbf/index.html', {'blog': blog})
-
+    blog = Blog.objects.all()[0]
+    return render(request, 'wlbf/blog.html', {'blog':blog})
 
 def about(request):
     return render(request, 'wlbf/about.html', {})
@@ -23,10 +22,19 @@ def category(request, category_name_slug):
         category = Category.objects.get(slug=category_name_slug)
         context_dict['category_name'] = category.name
         context_dict['category_name_slug'] = category.slug
-        blogs = Blog.objects.filter(category=category).order_by('-update_time')
-
-        context_dict['blogs'] = blogs
         context_dict['category'] = category
+
+        blogs = Blog.objects.filter(category=category).order_by('-post_time')
+        paginator = Paginator(blogs, 10)
+        page = request.GET.get('page')
+        blog_list = []
+        try:
+            blog_list = paginator.page(page)
+        except PageNotAnInteger:
+            blog_list = paginator.page(1)
+        except EmptyPage :
+            blog_list = paginator.paginator(paginator.num_pages)
+        context_dict['blog_list'] = blog_list
     except Category.DoesNotExist:
         pass
 
@@ -81,6 +89,19 @@ def add_blog(request, category_name_slug):
     context_dict = {'form':form, 'category': cat, 'category_name_slug': category_name_slug}
 
     return render(request, 'wlbf/add_blog.html', context_dict)    
+
+@login_required
+def del_blog(request, category_name_slug):
+    if request.method == 'GET':
+        if 'blog_id' in request.GET:
+            blog_id = request.GET['blog_id']
+            try:
+                Blog.objects.get(id=blog_id).delete()
+
+            except Blog.DoesNotExist:
+                raise Http404        
+    return category(request, category_name_slug)
+
 
 
 def track_url(request):

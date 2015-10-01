@@ -8,40 +8,67 @@
 
 
 <link href="{% static "css/blog.css" %}" rel="stylesheet"> 
-    <div class="page-header">
-    </div>
+
         {% if category %}
-            {% if blogs %}
+            {% if blog_list %}
 
 
-            <h2 class="sub-header">{{ category.name }}</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th>Title</th>
                   <th>Views</th>
-                  <th>Update</th>
+                  <th>Post</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-               {% for blog in blogs %}
+               {% for blog in blog_list %}
                <tr>
                 <td><a href="{% url 'goto' %}?blog_id={{blog.id}}">{{ blog.title }}</a></td>
-                <td>({{ blog.views }} views)</td>
-                <td class="blog-post-meta">{{ blog.update_time }}</td>
+                <td class="blog-post-meta">{{ blog.views }}</td>
+                <td class="blog-post-meta">{{ blog.post_time }}</td>
+                <td><a href="/wlbf/category/{{ category.slug }}/del_blog/?blog_id={{blog.id}}"><button type="submit" value="Submit" />Delete</button></a></td>
                </tr>
                {% endfor %}
               </tbody>
             </table>
           </div>
+          
+
+
+
+
+          {% if blog_list.object_list and blog_list.paginator.num_pages > 1 %}
+          <div>
+          <ul class="pager">
+          {% if blog_list.has_previous %}
+             <li><a href="/wlbf/category/{{ category.slug }}/?page={{ blog_list.previous_page_number }}">Previous</a></li>
+          {% endif %}
+
+          {% if blog_list.has_next %}
+            <li><a href="/wlbf/category/{{ category.slug }}/?page={{ blog_list.next_page_number }}">Next</a></li>
+          {% endif %}
+          </ul>
+          </div>
+          {% endif %}
+
+
+
 
 
 
             {% else %}
                 <strong>No blogs currently in category.</strong>
             {% endif %}
+  
+            <div>
+            {% if user.is_authenticated %}
             <a href="/wlbf/category/{{ category.slug }}/add_blog/"><button class="btn btn-primary" type="submit" value="Submit" />Add Blog</button></a>
+            {% endif %}
+            </div>
+
         {% else %}
             The specified category {{ category_name }} does not exist!
         {% endif %}

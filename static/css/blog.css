@@ -64,13 +64,13 @@
  */
 
 .blog-header {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 .blog-title {
-  margin-top: 30px;
+  margin-top: 0;
   margin-bottom: 0;
-  font-size: 60px;
+  font-size: 30px;
   font-weight: normal;
 }
 .blog-description {
@@ -128,7 +128,8 @@
 }
 .blog-post-title {
   margin-bottom: 5px;
-  font-size: 40px;
+  font-size: 30px;
+  color: #428bca;
 }
 .blog-post-meta {
   margin-bottom: 20px;

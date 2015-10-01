@@ -30,7 +30,7 @@ class Blog(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['-update_time']
+        ordering = ['-post_time']
 
 
 class UserProfile(models.Model):
