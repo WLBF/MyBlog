@@ -8,16 +8,17 @@
 
 <link href="{% static "css/blog.css" %}" rel="stylesheet"> 
 
-   {% if blog %}
+   {% if blog_list %}
 
      <div class="row">
 
         <div class="col-sm-8 blog-main">
-
+        {% for blog in blog_list %}
           <div class="blog-post">
             <h2 class="blog-post-title">{{ blog.title }}</h2>
             <p class="blog-post-meta">{{ blog.post_time }}</p>
             <div>{{ blog.content|custom_markdown }}</div>
+        {% endfor %}
          </div>
       </div>
 

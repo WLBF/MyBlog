@@ -7,8 +7,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def index(request):
-    blog = Blog.objects.all()[0]
-    return render(request, 'wlbf/blog.html', {'blog':blog})
+    blog_list = Blog.objects.all()[:1]
+    return render(request, 'wlbf/blog.html', {'blog_list':blog_list})
 
 def about(request):
     return render(request, 'wlbf/about.html', {})
@@ -62,7 +62,7 @@ def get_blog(request, blog_id):
         blog = Blog.objects.get(id=blog_id)
     except Blog.DoesNotExist:
         raise Http404        
-    return render(request, 'wlbf/blog.html', {'blog': blog})
+    return render(request, 'wlbf/blog.html', {'blog_list': [blog]})
 
 
 @login_required
